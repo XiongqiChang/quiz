@@ -22,6 +22,7 @@ public class OrderService {
     private OrderRepository orderRepository;
 
     public void addOrderVO(OrderVO orderVO) {
+
         OrderPO byOrderName = orderRepository.findByOrderName(orderVO.getOrderName());
         if (byOrderName != null){
             byOrderName.setOrderAmount(byOrderName.getOrderAmount() + orderVO.getOrderAmount());
@@ -34,7 +35,6 @@ public class OrderService {
 
 
     }
-
 
     public List<OrderVO> findAll() {
 

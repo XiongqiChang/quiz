@@ -2,6 +2,7 @@ package com.twuc.shopping.controller;
 
 import com.twuc.shopping.service.OrderService;
 import com.twuc.shopping.vo.OrderVO;
+import com.twuc.shopping.vo.ProductVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -23,7 +24,9 @@ public class OrderController {
 
 
     @PostMapping("/order")
-    public ResponseEntity addOrder(@RequestBody OrderVO orderVO){
+    public ResponseEntity addOrder(@RequestBody ProductVO productVO){
+        OrderVO orderVO = OrderVO.builder().orderName(productVO.getProductName()).orderPrice(productVO.getPrice()).orderUnit(productVO.getUnit())
+                .orderAmount(1).build();
         orderService.addOrderVO(orderVO);
         return ResponseEntity.ok().build();
     }

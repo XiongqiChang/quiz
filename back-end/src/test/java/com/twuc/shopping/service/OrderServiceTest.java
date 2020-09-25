@@ -1,7 +1,10 @@
 package com.twuc.shopping.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.twuc.shopping.po.ProductPO;
+import com.twuc.shopping.repository.ProductRepository;
 import com.twuc.shopping.vo.OrderVO;
+import com.twuc.shopping.vo.ProductVO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -10,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -30,12 +34,15 @@ class OrderServiceTest {
     private  OrderService orderService;
     @Autowired
     private MockMvc mockMvc;
+    @Autowired
+    private ProductService productService;
 
     @Test
     void addOrderVO() throws Exception {
-        OrderVO build = OrderVO.builder().orderAmount(2).orderName("可乐").orderPrice(new BigDecimal("123.01")).orderUnit("瓶").build();
+        ProductVO byProductId = productService.findByProductId(1);
+
         ObjectMapper objectMapper = new ObjectMapper();
-        String string = objectMapper.writeValueAsString(build);
+        String string = objectMapper.writeValueAsString(byProductId);
         mockMvc.perform(post("/order").content(string).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
