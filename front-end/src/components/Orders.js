@@ -15,7 +15,7 @@ export default class Orders extends Component{
     }
     render() {
         let { orders = [] } = this.state;
-        return (<div>我是order
+        return (<div>我是orders
             
                  <table >
                      <thead>

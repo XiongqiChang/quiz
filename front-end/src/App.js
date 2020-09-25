@@ -3,6 +3,7 @@ import { BrowserRouter,Route,Switch,Link } from 'react-router-dom'
 import './App.css';
 import Products from './components/Products';
 import Orders from './components/Orders';
+import AddProduct from './components/AddProduct';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Switch>  
           <Route exact path={"/"} component={Products}></Route>
           <Route path={"/orders"} component={Orders}></Route>   
+          <Route path={"/addProduct"} component={AddProduct}></Route>   
       </Switch>
       </div>
     </BrowserRouter>
