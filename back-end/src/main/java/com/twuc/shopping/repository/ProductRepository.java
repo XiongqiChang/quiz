@@ -1,10 +1,7 @@
 package com.twuc.shopping.repository;
 
 import com.twuc.shopping.po.ProductPO;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.List;
 
