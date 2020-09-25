@@ -1,13 +1,10 @@
 import React, { Component } from 'react'
 
 export default class AddProduct extends Component{
-    state = {
-        productName: '',
-        price: '',
-        unit: '',
-        pictureUrl: ''
-        
-    }
+    constructor(props) {
+        super(props);
+        this.state
+   }
     handleInput = (event)=>{
       
         this.setState({
@@ -22,19 +19,20 @@ export default class AddProduct extends Component{
         console.log((JSON.stringify(this.state)));
         alert(JSON.stringify(this.state));
 
-        const {productName,
-            price,
-            unit,
-            pictureUrl
+        const {
+            orderName,
+            orderPrice,
+            orderAmount,
+            orderUnit
+            
            } = this.state;
-                        fetch('http://localhost:8080/product', {
+                        fetch('http://localhost:8080/order', {
                              method: 'post',
-    // 使用fetch提交的json数据需要使用JSON.stringify转换为字符串
                        body: JSON.stringify({
-                            productName,
-                            price,
-                            unit,
-                            pictureUrl
+                            orderName,
+                            orderPrice,
+                            orderAmount,
+                            orderUnit
                         }),
                             headers: {
                                 'Access-Control-Allow-Origin': '*',
@@ -46,15 +44,15 @@ export default class AddProduct extends Component{
       // 当添加成功时，返回的json对象中应包含一个有效的id字段
       // 所以可以使用res.id来判断添加是否成功
       if (res.id) {
-        alert('添加成功');
+        alert('购买成功');
         this.setState({
-            productName: '',
-            price: '',
-            unit: '',
-            pictureUrl: ''
+            orderName: '',
+            orderPrice: '',
+            orderAmount: '',
+            orderUnit: ''
         });
       } else {
-        alert('添加失败');
+        alert('购买失败');
       }
     })
     .catch((err) => console.error(err));
@@ -63,15 +61,13 @@ export default class AddProduct extends Component{
 
     }
     handleClick = (event)=>{
-        let product = {
-            productName: event.target.state.productName,
-            price: event.target.state.price,
-            unit: event.target.state.gender,
-            pictureUrl: event.target.state.pictureUrl,
-            
-
+        let order = {
+            orderName: event.target.state.orderName,
+            orderPrice: event.target.state.orderPrice,
+            orderAmount: event.target.state.orderAmount,
+            orderUnit: event.target.state.orderUnit,
         }
-        console.log(product);
+        console.log(order);
     }
     
     render() {
