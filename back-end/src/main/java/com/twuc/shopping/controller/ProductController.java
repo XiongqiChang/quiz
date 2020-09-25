@@ -36,7 +36,7 @@ public class ProductController {
     @PostMapping("/product")
     public ResponseEntity addProduct(@RequestBody ProductVO  productVO){
          if (!productService.addProduct(productVO)){
-             return ResponseEntity.badRequest().build();
+             return ResponseEntity.badRequest().body("商品名称已经存在，请输入新的商品");
         }
         return  ResponseEntity.ok().build();
     }

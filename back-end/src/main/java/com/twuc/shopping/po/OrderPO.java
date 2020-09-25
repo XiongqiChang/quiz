@@ -35,7 +35,7 @@ public class OrderPO {
     private Integer orderAmount;
 
     @Column(name = "order_unit")
-    private Integer orderUnit;
+    private String orderUnit;
 
 
 }

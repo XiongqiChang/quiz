@@ -19,10 +19,9 @@ import java.util.stream.Collectors;
  */
 @Service
 public class ProductService {
+
     @Autowired
     private ProductRepository productRepository;
-
-
     public List<ProductVO> findAll() {
 
         List<ProductPO> all = productRepository.findAll();
@@ -49,8 +48,8 @@ public class ProductService {
     }
 
     public boolean  addProduct(ProductVO productVO) {
-        Optional<ProductPO> byId = productRepository.findById(productVO.getId());
-        if (!byId.isPresent()){
+        ProductPO byProductName = productRepository.findByProductName(productVO.getProductName());
+        if (byProductName != null){
             return false;
         }
         ProductPO buildProduct = ProductPO.builder().pictureUrl(productVO.getPictureUrl())
