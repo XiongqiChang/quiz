@@ -1,7 +1,6 @@
 package com.twuc.shopping.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.twuc.shopping.po.ProductPO;
 import com.twuc.shopping.vo.ProductVO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,14 +1,11 @@
 package com.twuc.shopping.controller;
 
-import com.sun.org.apache.regexp.internal.RE;
 import com.twuc.shopping.service.OrderService;
 import com.twuc.shopping.vo.OrderVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -37,6 +34,12 @@ public class OrderController {
         return  ResponseEntity.ok(all);
     }
 
-
-
+    @DeleteMapping("/order/{id}")
+    public ResponseEntity deleteById(@PathVariable Integer id){
+        boolean flag = orderService.deleteOrderById(id);
+        if (!flag){
+            return  ResponseEntity.badRequest().body("“订单删除失败，请稍后再试");
+        }
+        return  ResponseEntity.ok().body("删除成功");
+    }
 }

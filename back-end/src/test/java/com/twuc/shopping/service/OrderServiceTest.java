@@ -9,8 +9,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.hamcrest.Matchers.hasSize;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
@@ -36,7 +37,24 @@ class OrderServiceTest {
         mockMvc.perform(post("/order").content(string).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
+    }
 
+    @Test
+    void getAll() throws Exception {
+        mockMvc.perform(get("/order"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$",hasSize(1)));
+    }
 
+    @Test
+    void deleteById() throws Exception {
+        mockMvc.perform(delete("/order/" + 122))
+                .andExpect(status().isBadRequest());
+
+    }
+    @Test
+    void deleteByIdSuccess() throws Exception {
+        mockMvc.perform(delete("/order/" + 2))
+                .andExpect(status().isOk());
     }
 }
