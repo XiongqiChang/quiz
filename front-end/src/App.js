@@ -10,16 +10,18 @@ function App() {
 
     <BrowserRouter>
       <div className="App">
-      <div >
+        <div >
+          <Link to={"/"}>商城</Link><br></br>
           <Link to={"/addProduct"}> 添加商品</Link><br></br>
-          <Link to={"/orders"}>订单列表</Link><br></br>
-          
-      </div>
-      <Switch>  
+          <Link to={"/orders"}>订单</Link><br></br>
+        </div>
+        
+       <Switch>  
           <Route exact path={"/"} component={Products}></Route>
           <Route path={"/orders"} component={Orders}></Route>   
           <Route path={"/addProduct"} component={AddProduct}></Route>   
-      </Switch>
+        </Switch>
+        
       </div>
     </BrowserRouter>
   );
