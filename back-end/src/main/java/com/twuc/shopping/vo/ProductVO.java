@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.Column;
+import java.math.BigDecimal;
 
 /**
  * @Author: xqc
@@ -19,7 +20,8 @@ public class ProductVO {
 
     private String productName;
 
-    private Integer price;
+
+    private BigDecimal price;
 
 
     private String unit;

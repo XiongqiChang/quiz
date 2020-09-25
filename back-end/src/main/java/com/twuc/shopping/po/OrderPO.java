@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 /**
  * @Author: xqc
@@ -29,7 +30,7 @@ public class OrderPO {
     private  String orderName;
 
     @Column(name = "order_price")
-    private Integer orderPrice;
+    private BigDecimal orderPrice;
     @Column(name = "order_amount")
 
     private Integer orderAmount;

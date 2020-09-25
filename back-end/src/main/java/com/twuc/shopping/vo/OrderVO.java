@@ -6,6 +6,7 @@ import lombok.Data;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.math.BigDecimal;
 
 /**
  * @Author: xqc
@@ -23,7 +24,7 @@ public class OrderVO {
     private  String orderName;
 
 
-    private Integer orderPrice;
+    private BigDecimal orderPrice;
 
 
     private Integer orderAmount;

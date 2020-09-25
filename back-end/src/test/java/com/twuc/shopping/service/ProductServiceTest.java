@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
@@ -46,15 +47,15 @@ class ProductServiceTest {
     void findById() throws Exception {
         mockMvc.perform(get("/product/" + 1))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.productName",is("可乐")))
-                .andExpect(jsonPath("$.price",is(2)));
+                .andExpect(jsonPath("$.productName",is("麻辣烫")));
+        System.out.println(productService.findByProductId(1).getPrice());
 
     }
 
     @Test
     void shouldAddProduct() throws Exception {
 
-        ProductVO build = ProductVO.builder().pictureUrl("xxxx").unit("碗").productName("麻辣烫").price(10).build();
+        ProductVO build = ProductVO.builder().pictureUrl("xxxx").unit("碗").productName("麻辣烫").price(new BigDecimal("123.000")).build();
         ObjectMapper objectMapper = new ObjectMapper();
         String string = objectMapper.writeValueAsString(build);
 
@@ -62,7 +63,7 @@ class ProductServiceTest {
                 .andExpect(status().isOk());
         mockMvc.perform(get("/products"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$",hasSize(3)));
+                .andExpect(jsonPath("$",hasSize(1)));
 
 
     }
