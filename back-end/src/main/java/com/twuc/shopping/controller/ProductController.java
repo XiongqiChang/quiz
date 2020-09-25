@@ -34,8 +34,11 @@ public class ProductController {
     }
 
     @PostMapping("/product")
-    public ResponseEntity addProduct(@RequestBody ){
-
+    public ResponseEntity addProduct(@RequestBody ProductVO  productVO){
+         if (!productService.addProduct(productVO)){
+             return ResponseEntity.badRequest().build();
+        }
+        return  ResponseEntity.ok().build();
     }
 
 

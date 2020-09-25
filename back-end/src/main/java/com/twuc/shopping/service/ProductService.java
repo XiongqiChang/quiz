@@ -4,13 +4,9 @@ import com.twuc.shopping.po.ProductPO;
 import com.twuc.shopping.repository.ProductRepository;
 import com.twuc.shopping.vo.ProductVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -50,5 +46,18 @@ public class ProductService {
                 .price(productPO.getPrice())
                 .pictureUrl(productPO.getPictureUrl()).build();
         return productVo;
+    }
+
+    public boolean  addProduct(ProductVO productVO) {
+        Optional<ProductPO> byId = productRepository.findById(productVO.getId());
+        if (!byId.isPresent()){
+            return false;
+        }
+        ProductPO buildProduct = ProductPO.builder().pictureUrl(productVO.getPictureUrl())
+                .price(productVO.getPrice())
+                .productName(productVO.getProductName())
+                .unit(productVO.getUnit()).build();
+        productRepository.save(buildProduct);
+        return true;
     }
 }
